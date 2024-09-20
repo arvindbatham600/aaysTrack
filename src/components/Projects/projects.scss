@@ -1,0 +1,108 @@
+#projectLayout-main {
+  min-height: calc(100vh - 55px);
+  background-color: #eff2f5;
+
+  .projects-main {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 300px); /* Width minus sidebar width */
+    margin-left: 300px; /* Align with the sidebar */
+    margin-top: 55px;
+    padding: 20px 0px;
+
+    .projects-body {
+      padding: 0 20px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+
+      .project-card {
+        background-color: #f7f7f7;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        width: 300px;
+        margin: 20px;
+
+        .top {
+          display: flex;
+          justify-content: left;
+          gap: 20px;
+          align-items: center;
+
+          .heading {
+            font-size: 20px;
+          }
+          .project-status {
+            margin-bottom: 10px;
+            .status {
+              padding: 5px 10px;
+              border-radius: 10px;
+              font-size: 12px;
+              //   font-weight: bold;
+            }
+
+            .yellow {
+              background-color: #f7dc6f;
+              color: #333;
+            }
+
+            .green {
+              background-color: #34c759;
+              color: #fff;
+            }
+          }
+        }
+      }
+
+      .project-members {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+
+        img {
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          margin: 5px;
+          cursor: pointer;
+        }
+      }
+
+      .project-rating {
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      /* CSS */
+      .view-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 6px 14px;
+        font-family: -apple-system, BlinkMacSystemFont, "Roboto", sans-serif;
+        border-radius: 6px;
+        border: none;
+        cursor: pointer;
+
+        color: #fff;
+        background: linear-gradient(180deg, #4b91f7 0%, #367af6 100%);
+        background-origin: border-box;
+        box-shadow: 0px 0.5px 1.5px rgba(54, 122, 246, 0.25),
+          inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2);
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+      }
+
+      .view-btn:focus {
+        box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2),
+          0px 0.5px 1.5px rgba(54, 122, 246, 0.25),
+          0px 0px 0px 3.5px rgba(58, 108, 217, 0.5);
+        outline: 0;
+      }
+    }
+  }
+}

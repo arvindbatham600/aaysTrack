@@ -1,0 +1,40 @@
+.topbar-main {
+    height: 55px;
+    width: calc(100% - 300px); // Adjust width to take into account the sidebar width
+    position: fixed;
+    left: 300px; // Adjust positioning to make sure it starts after the sidebar
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; // Center vertically within the height
+    border-bottom: 1px solid rgb(187, 184, 184);
+    z-index: 1000; // Ensure it's above other content
+    background-color: #EFF2F5;
+
+    .logo {
+        font-size: 25px;
+        padding: 0 20px; // Add padding if needed
+    }
+
+    .profile-info {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        padding: 0 20px; // Add padding if needed
+    }
+
+    .profile-pic img {
+        width: 30px; // Define a fixed size for images
+        height: 30px;
+        border-radius: 50%; // Optional: round profile picture
+        padding: 5px;
+        border: 1px solid green;
+    }
+
+    .logout-btn {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        cursor: pointer;
+    }
+}

@@ -1,0 +1,54 @@
+#sidebar-main {
+  width: 300px; // Set the width of the sidebar
+  height: 100vh; // Make the sidebar full height of the viewport
+  position: fixed; // Fix the sidebar in place
+  top: 0; // Align the top of the sidebar to the top of the viewport
+  left: 0; // Align the sidebar to the left of the viewport
+  background-color: white; // Example background color, adjust as needed
+  border-right: 1px solid #ddd; // Optional border for better separation
+  overflow-y: auto; // Ensure sidebar content is scrollable if it overflows
+
+  .sidebar-body {
+    padding: 100px 10px 0px 10px;
+    .profile-section {
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      .profile {
+        .profile-pic {
+          height: 50px;
+          border-radius: 50%;
+          padding: 5px;
+          border: 1px solid green;
+        }
+        .name {
+          font-size: 20px;
+        }
+        .designation {
+          font-size: 15px;
+        }
+      }
+    }
+    .menu-section {
+      display: flex;
+      justify-content: center;
+      margin-top: 50px;
+
+      .menu-section-body {
+        width: 150px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        gap: 20px;
+
+        .menu {
+          display: flex;
+          gap: 10px;
+          justify-content: left;
+          align-items: center;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

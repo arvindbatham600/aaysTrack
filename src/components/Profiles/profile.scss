@@ -1,0 +1,100 @@
+#profileLayout-main {
+  min-height: calc(100vh - 55px);
+  background-color: #eff2f5;
+}
+  .profile-main {
+    width: calc(100% - 300px); /* Width minus sidebar width */
+    margin-left: 300px; /* Align with the sidebar */
+    margin-top: 55px;
+    padding: 40px 0px 0px 0px;
+    .profile-body {
+      padding: 0 20px;
+      display: flex;
+
+      .left {
+        width: 30%;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-direction: column;
+
+        .avatar {
+          img {
+            height: 200px;
+            width: 200px;
+            border-radius: 50%;
+            border: 1px solid green;
+          }
+        }
+        .name{
+            font-size: 25px;
+        }
+      }
+      .right {
+        width: 70%;
+
+        .heading {
+          font-size: 20px;
+        }
+
+        .container {
+          display: flex;
+          justify-content: left;
+          flex-wrap: wrap;
+          // gap: 20px;
+          .project-box {
+            background-color: #f7f7f7;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            min-width: 300px;
+            margin: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-direction: column;
+
+            .project-name, .project-rating, .project-status{
+                display: flex;
+                gap: 5px;
+            }
+
+            .status {
+              padding: 5px 10px;
+              border-radius: 10px;
+              font-size: 12px;
+              //   font-weight: bold;
+            }
+            .view-btn {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              padding: 6px 14px;
+              font-family: -apple-system, BlinkMacSystemFont, "Roboto",
+                sans-serif;
+              border-radius: 6px;
+              border: none;
+              cursor: pointer;
+              width: 80px;
+
+              color: #fff;
+              background: linear-gradient(180deg, #4b91f7 0%, #367af6 100%);
+              background-origin: border-box;
+              box-shadow: 0px 0.5px 1.5px rgba(54, 122, 246, 0.25),
+                inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2);
+              user-select: none;
+              -webkit-user-select: none;
+              touch-action: manipulation;
+            }
+
+            .view-btn:focus {
+              box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2),
+                0px 0.5px 1.5px rgba(54, 122, 246, 0.25),
+                0px 0px 0px 3.5px rgba(58, 108, 217, 0.5);
+              outline: 0;
+            }
+          }
+        }
+      }
+    }
+  }

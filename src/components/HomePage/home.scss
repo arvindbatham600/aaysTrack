@@ -1,0 +1,45 @@
+#homelayout-main {
+  min-height: calc(100vh - 55px);
+  background-color: #eff2f5;
+
+  .home-main {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 300px); /* Width minus sidebar width */
+    margin-left: 300px; /* Align with the sidebar */
+    margin-top: 55px;
+    padding: 40px 0px;
+
+    .home-body {
+        display: flex;
+        gap: 30px;
+        flex-wrap: wrap;
+        justify-content:center;
+
+        .profile-main{
+          padding: 0;
+          margin: 0;
+          width: 100%;
+        }
+
+      .box-main {
+        background-color: white;
+        width: 300px;
+        height: 100px;
+        border-radius: 20px;
+        padding: 10px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .box-body {
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+          gap: 20px;
+        }
+      }
+    }
+  }
+}

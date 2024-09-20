@@ -1,0 +1,47 @@
+#managersLayout-main {
+  min-height: calc(100vh - 55px);
+  background-color: #eff2f5;
+  cursor: pointer;
+
+  .managers-main {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 300px); /* Width minus sidebar width */
+    margin-left: 300px; /* Align with the sidebar */
+    margin-top: 55px;
+    padding: 20px 0px;
+
+    .managers-body {
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 20px;
+      .manager-card-main {
+        // padding: 20px;
+        background-color: white;
+        padding: 20px 0;
+        width: 250px;
+        height: 200px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 10px;
+        img {
+          height: 50px;
+          width: 50px;
+          border-radius: 50%;
+          border: 2px solid green;
+          padding: 10px;
+        }
+        .name {
+          font-size: 20px;
+        }
+        .designation {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}

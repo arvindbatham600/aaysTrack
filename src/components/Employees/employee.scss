@@ -1,0 +1,17 @@
+#employeeLayout-main{
+    min-height: calc(100vh - 55px);
+  background-color: #eff2f5;
+
+  .employees-main{
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 300px); /* Width minus sidebar width */
+    margin-left: 300px; /* Align with the sidebar */
+    margin-top: 55px;
+    padding: 20px 0px;
+
+    .employees-body{
+        padding: 20px;
+    }
+  }
+}

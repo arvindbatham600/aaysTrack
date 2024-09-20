@@ -1,0 +1,24 @@
+#navbar-main{
+    .navbar-body{
+        background-color: #2f488e;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 50px;
+        color: white;
+        padding: 0 20px;
+
+        .navbar-logo{
+           cursor: pointer;
+        }
+        .activity-buttons{
+            display: flex;
+            gap: 20px;
+
+            .button{
+                cursor: pointer;
+            }
+        }
+
+    }
+}
