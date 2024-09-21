@@ -14,7 +14,7 @@
     .managers-body {
       padding: 0 20px;
       display: flex;
-      justify-content: space-around;
+      justify-content: center;
       flex-wrap: wrap;
       gap: 20px;
       .manager-card-main {
@@ -44,4 +44,20 @@
       }
     }
   }
+}
+.manager-view-box{
+  background-color: #f7f7f7;
+          padding: 20px;
+          border: 1px solid #ddd;
+          border-radius: 10px;
+          // min-width: 300px;
+          margin: 20px;
+          display: flex;
+          justify-content: center;
+          gap: 10px;
+          flex-direction: column;
+}
+
+.css-rsks93-MuiPaper-root-MuiDialog-paper{
+  max-width: 90% !important;
 }

@@ -196,7 +196,7 @@ const SignUp = () => {
               Already have an account? <a href="/login">Log In</a>
             </Typography>
             <Typography className="copyright">
-              Copyright &copy; Your Website 2024.
+              Copyright &copy; AAYSTrack 2024.
             </Typography>
           </div>
         </div>

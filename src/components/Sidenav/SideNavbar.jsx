@@ -93,16 +93,22 @@ const SideNavbar = () => {
   const handleClick = (path) => {
     navigate(path); // Use the path to navigate
   };
-  // const user = useSelector((state) => state.auth.user);
-  // const role = user.role;
-  const role = useSelector((state) => state.auth.role);
+  // const user = useSelector((state) => state.auth);
+  // const user = JSON.parse(localStorage.getItem("user"))
+  // console.log("user in sidebar", user);
+  const localUser = JSON.parse(localStorage.getItem("user"));
+  console.log("local user in sidenavbar", localUser);
+  const role = localUser.userDetails.role;
+  const name = localUser.userDetails.name;
+  const designation = localUser.userDetails.designation
+  
 
   let menuData;
-  if (role === "Admin") {
+  if (role === "ADMIN") {
     menuData = AdminMenuData
-  } else if (role === "Manager") {
+  } else if (role === "MANAGER") {
     menuData = ManagerMenuData;
-  } else if (role === "Employee") {
+  } else if (role === "EMPLOYEE") {
     menuData = EmployeeMenuData;
   }
 
@@ -117,8 +123,8 @@ const SideNavbar = () => {
               src="https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?w=1380&t=st=1726432587~exp=1726433187~hmac=e65fedd0fa03adf3fab4c786f85b7c7c52a8532d66ca1c1b1246d9798da75067"
               alt="Profile"
             />
-            <div className="name">AaysTrack</div>
-            <div className="designation">Tech Titans</div>
+            <div className="name">{ name}</div>
+            <div className="designation">{designation}</div>
           </div>
         </div>
 

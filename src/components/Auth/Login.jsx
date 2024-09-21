@@ -7,12 +7,16 @@ import {
   FormControlLabel,
   Typography,
   Box,
+  InputAdornment,
+  IconButton,
 } from "@mui/material";
 import "./Login.scss";
 import Navbar from "../Navbar/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { loginSuccess, loginFailure } from "../redux/features/authSlice";
 import { useNavigate } from "react-router-dom";
+import { Visibility, VisibilityOff } from "@mui/icons-material"; // Import eye icons
+
 import api from "../utils/api";
 
 const Login = () => {
@@ -21,6 +25,8 @@ const Login = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState(""); // For handling errors
   const [loading, setLoading] = useState(false); // To show loading state
+  const [showPassword, setShowPassword] = useState(false); // State for password visibility
+
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -39,6 +45,11 @@ const Login = () => {
     setRememberMe(event.target.checked);
   };
 
+   const handleTogglePasswordVisibility = () => {
+     setShowPassword((prev) => !prev);
+   };
+
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
@@ -53,6 +64,10 @@ const Login = () => {
 
       console.log("Login successful:", response.data);
       dispatch(loginSuccess(response?.data));
+      localStorage.setItem("user", JSON.stringify(response.data));
+      localStorage.setItem("token", JSON.stringify(response.data.token))
+      localStorage.setItem("role", JSON.stringify(response.data.userDetails?.role) )
+
       navigate("/home");
       // Handle successful login here, e.g., redirect to another page
     } catch (error) {
@@ -87,12 +102,35 @@ const Login = () => {
               />
               <TextField
                 label="Password"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 variant="outlined"
                 value={password}
                 onChange={handlePasswordChange}
                 required
                 fullWidth
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        sx={{
+                          backgroundColor: "white",
+                          color: "#212121",
+                          "&:hover": {
+                            backgroundColor: "white",
+                          },
+                        }}
+                        onClick={handleTogglePasswordVisibility}
+                        edge="end"
+                      >
+                        {showPassword ? (
+                          <VisibilityOff color="blue" />
+                        ) : (
+                          <Visibility color="blue" />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
               />
               <FormControlLabel
                 control={
@@ -116,10 +154,10 @@ const Login = () => {
               {error && <Typography color="error">{error}</Typography>}
             </Box>
             <Typography>
-              Don't have an account? <a href="#">Sign Up</a>
+              Don't have an account? <a href="/signup">Sign Up</a>
             </Typography>
             <Typography className="copyright">
-              Copyright &copy; Your Website 2024.
+              Copyright &copy; AAYSTrack 2024.
             </Typography>
           </div>
         </div>
