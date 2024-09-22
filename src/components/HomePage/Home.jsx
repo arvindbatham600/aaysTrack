@@ -4,64 +4,62 @@ import Profile from "../Profiles/Profile";
 import { useEffect, useState } from "react";
 import api from "../utils/api";
 
-
-
-
 const Home = () => {
-  const [managercCount, setManagerCout] = useState();
-  const [employeeCount, setEmployeeCount] = useState();
-  const [projectCount, setProjectCount] = useState();
+  const [managerCount, setManagerCount] = useState(0);
+  const [employeeCount, setEmployeeCount] = useState(0);
+  const [projectCount, setProjectCount] = useState(0);
   const dispatch = useDispatch();
-  const user = JSON.parse(localStorage.getItem("user"));
-  const role = user.userDetails.role;
+  const user = JSON.parse(localStorage.getItem("user")) || {};
+  const role = user.userDetails?.role;
 
   const fetchManagersData = async () => {
     try {
       const response = await api.get("/user/getManagersWithProjectDetails", {
-        role,
+        params: { role },
       });
-      setManagerCout(response.data?.managers.length);
+      setManagerCount(response.data?.managers.length || 0);
     } catch (error) {
       console.error("Error fetching manager data:", error);
-      alert("Error fetching manager data:" + error);
+      alert("Error fetching manager data: " + error.message);
     }
   };
 
-    const fetchAllProjects = async () => {
+  const fetchAllProjects = async () => {
+    try {
       const { data } = await api.get("/user/globalProjects");
-      setProjectCount(data.users.length);
-    };
-  
-    const fetchEmployeeData = async () => {
-      try {
-        const response = await api.get("/user/getEmployeesWithProjectDetails", {
-          role,
-        });
-        const employees = response.data?.employees || [];
-        setEmployeeCount(employees.length);
-      } catch (error) {
-        console.error("Error fetching employees data:", error);
-        alert("Error fetching employees data: " + error);
-      }
-    };
-  
-  console.log("manager, project, employee",managercCount , projectCount, employeeCount )
+      setProjectCount(data.users?.length || 0);
+    } catch (error) {
+      console.error("Error fetching project data:", error);
+      alert("Error fetching project data: " + error.message);
+    }
+  };
+
+  const fetchEmployeeData = async () => {
+    try {
+      const response = await api.get("/user/getEmployeesWithProjectDetails", {
+        params: { role },
+      });
+      const employees = response.data?.employees || [];
+      setEmployeeCount(employees.length);
+    } catch (error) {
+      console.error("Error fetching employees data:", error);
+      alert("Error fetching employees data: " + error.message);
+    }
+  };
 
   useEffect(() => {
-    fetchManagersData();
-    fetchEmployeeData();
-    fetchAllProjects();
-  },[])
-
-
-
-  console.log(" role in home ", role)
+    if (role === "ADMIN") {
+      fetchManagersData();
+      fetchEmployeeData();
+      fetchAllProjects();
+    }
+  }, [role]);
 
   const homeBoxesData = [
     {
       id: 1,
       text: "Total No. of Managers",
-      value: managercCount,
+      value: managerCount,
     },
     {
       id: 2,
@@ -69,21 +67,20 @@ const Home = () => {
       value: employeeCount,
     },
     {
-      id: 1,
-      text: "Total No. of projects",
+      id: 3, // Unique id
+      text: "Total No. of Projects",
       value: projectCount,
     },
   ];
 
-
-
   return (
     <>
       <div className="home-main">
-        <div className="home-body" >
-          { role === "ADMIN" && homeBoxesData.map((item) => (
-            <Box key={item.id} text={item.text} value={item.value} />
-          ))}
+        <div className="home-body">
+          {role === "ADMIN" &&
+            homeBoxesData.map((item) => (
+              <Box key={item.id} text={item.text} value={item.value} />
+            ))}
           {(role === "MANAGER" || role === "EMPLOYEE") && <Profile />}
         </div>
       </div>

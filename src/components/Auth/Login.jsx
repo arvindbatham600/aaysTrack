@@ -56,7 +56,7 @@ const Login = () => {
     setError(""); // Reset error state
 
     try {
-      const response = await api.post("http://localhost:3000/user/login", {
+      const response = await api.post("/user/login", {
         email: username,
         password,
         // rememberMe,
@@ -66,7 +66,14 @@ const Login = () => {
       dispatch(loginSuccess(response?.data));
       localStorage.setItem("user", JSON.stringify(response.data));
       localStorage.setItem("token", JSON.stringify(response.data.token))
-      localStorage.setItem("role", JSON.stringify(response.data.userDetails?.role) )
+      localStorage.setItem(
+        "role",
+        JSON.stringify(response.data.userDetails?.role)
+      );
+      localStorage.setItem(
+        "id",
+        JSON.stringify(response.data.userDetails?.id)
+      );
 
       navigate("/home");
       // Handle successful login here, e.g., redirect to another page
