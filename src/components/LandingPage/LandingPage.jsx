@@ -1,4 +1,5 @@
 import Navbar from "../Navbar/Navbar";
+import Landing from "./Landing";
 import "./landingPage.scss";
 
 const LandingPage = () => {
@@ -6,6 +7,7 @@ const LandingPage = () => {
     <>
       <div id="landingPage-main">
         <Navbar />
+        <Landing />
       </div>
     </>
   );
