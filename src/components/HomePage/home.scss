@@ -23,23 +23,43 @@
         }
 
       .box-main {
-        background-color: white;
-        width: 300px;
-        height: 100px;
-        border-radius: 20px;
-        padding: 10px;
-        text-align: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+  background-color: white;
+  width: 300px;
+  height: 100px;
+  border-radius: 20px;
+  padding: 15px; // Slightly increased padding
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); // Added shadow for depth
+  transition: transform 0.3s, box-shadow 0.3s; // Smooth transition for hover effects
+  
+  &:hover {
+    transform: translateY(-5px); // Lift effect on hover
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); // Darker shadow on hover
+  }
 
-        .box-body {
-          display: flex;
-          justify-content: center;
-          flex-direction: column;
-          gap: 20px;
-        }
-      }
+  .box-body {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px; // Adjusted gap for better spacing
+    
+    .text {
+      font-size: 1.2rem; // Increased font size for text
+      color: #333; // Darker color for better readability
+      font-weight: 600; // Bold text
+    }
+    
+    .number {
+      font-size: 1.5rem; // Increased font size for number
+      color: #007BFF; // Color for number (can be customized)
+      font-weight: 700; // Bolder number for emphasis
+    }
+  }
+}
+
     }
   }
 }
