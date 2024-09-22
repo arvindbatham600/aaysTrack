@@ -35,7 +35,7 @@ const Profile = () => {
           </div>
           <div className="name">{details.name}</div>
           <div className="designation">{details.designation}</div>
-          <div className="rating">Rating: {details.rating}</div>
+          {/* <div className="rating">Rating: {details.rating}</div> */}
         </div>
         <div className="right">
           <div className="heading">Projects</div>

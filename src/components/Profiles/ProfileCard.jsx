@@ -12,13 +12,13 @@ const ProfileCard = ({ project }) => {
   const [userRatings, setUserRatings] = useState([]);
   const [projectId, setProjectId] = useState();
   const [open, setOpen] = useState(false);
+  const [averageRating, setAverageRating] = useState(0);
 
-  const { id, name, rating, status, startDate, endDate, ratings } = project;
+  const { id, name, status, startDate, endDate, ratings } = project;
   const details = JSON.parse(localStorage.getItem("user"))?.userDetails;
   const manager = details?.name;
   const role = JSON.parse(localStorage.getItem("role"));
-  console.log("project details", project);
-  console.log("ratings", ratings);
+ 
 
   const fetchEmployeesRatings = async () => {
     try {
@@ -28,9 +28,15 @@ const ProfileCard = ({ project }) => {
       setProjectId(response.data?.Project?.id);
     } catch (error) {
       console.error("Error while fetching project information:", error);
-      // Optionally set an error state here
     }
   };
+
+  useEffect(() => {
+    if (userRatings.length > 0) {
+      let totalRating = userRatings.reduce((acc, item) => acc + item.rating, 0);
+      setAverageRating(totalRating / userRatings.length);
+    }
+  }, [userRatings]);
 
   const handleOpen = () => {
     if (role === "MANAGER") {
@@ -41,8 +47,8 @@ const ProfileCard = ({ project }) => {
 
   const handleClose = () => {
     setOpen(false);
-    setUserRatings([]); // Reset on close
-    setEmployeeInfo([]); // Reset on close
+    setUserRatings([]);
+    setEmployeeInfo([]);
   };
 
   // Define status-to-color mapping
@@ -57,9 +63,10 @@ const ProfileCard = ({ project }) => {
   const { background, color } = statusColors[status] || {
     background: "black",
     color: "white",
-  }; // Default color if status not in map
+  };
 
   let ratingName = role === "EMPLOYEE" ? "Your" : "Project";
+  console.log("userRatings", userRatings)
 
   return (
     <>
@@ -68,12 +75,15 @@ const ProfileCard = ({ project }) => {
           <div>Project Name - </div>
           <div>{name}</div>
         </div>
-        {role === "MANAGER" && (
-          <div className="project-rating">
-            <div>{ratingName} Rating - </div>
-            <div>{rating}</div>
-          </div>
-        )}
+
+        <div className="project-name">
+          <div>Start Date - </div>
+          <div>{startDate}</div>
+        </div>
+        <div className="project-name">
+          <div>End Date - </div>
+          <div>{endDate}</div>
+        </div>
         <div className="project-status">
           <div>Status - </div>
           <div
@@ -100,6 +110,13 @@ const ProfileCard = ({ project }) => {
             <div>Project Name - </div>
             <div>{name}</div>
           </div>
+          {role === "MANAGER" && (
+            <div className="project-rating">
+              <div>{ratingName} Rating - </div>
+              <div>{averageRating.toFixed(2)}</div>{" "}
+              {/* Format to 2 decimal places */}
+            </div>
+          )}
           <div className="project-status">
             <div>Status - </div>
             <div
@@ -125,18 +142,14 @@ const ProfileCard = ({ project }) => {
           </div>
           {role === "EMPLOYEE" && (
             <div className="pro">
-              <div> Review - </div>
-              <div>
-                {ratings.length > 0 && <div>{ratings[0].review} </div>}{" "}
-              </div>
+              <div>Review - </div>
+              <div>{ratings.length > 0 && <div>{ratings[0].review}</div>}</div>
             </div>
           )}
           {role === "EMPLOYEE" && (
             <div className="pro">
-              <div> Review - </div>
-              <div>
-                {ratings.length > 0 && <div>{ratings[0].rating} </div>}{" "}
-              </div>
+              <div>Rating - </div>
+              <div>{ratings.length > 0 && <div>{ratings[0].rating}</div>}</div>
             </div>
           )}
           {role === "MANAGER" && (
