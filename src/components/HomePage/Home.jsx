@@ -10,7 +10,7 @@ const Home = () => {
   const [managerCount, setManagerCount] = useState(0);
   const [employeeCount, setEmployeeCount] = useState(0);
   const [projectCount, setProjectCount] = useState(0);
-  const [loading, setLoading] = useState(true); // Loading state
+  const [loading, setLoading] = useState(false); // Loading state
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("user")) || {};
   const role = user.userDetails?.role;
@@ -66,6 +66,9 @@ const Home = () => {
           setLoading(false);
         });
     }
+    if (role === "MANAGER" || "EMPLOYEE") {
+      setLoading(false)
+    }
   }, [role]);
 
   const homeBoxesData = [
@@ -104,7 +107,7 @@ const Home = () => {
           homeBoxesData.map((item) => (
             <Box key={item.id} text={item.text} value={item.value} />
           ))}
-        {!loading && (role === "MANAGER" || role === "EMPLOYEE") && <Profile />}
+        {(role === "MANAGER" || role === "EMPLOYEE") && <Profile />}
       </div>
     </div>
   );

@@ -25,7 +25,7 @@ const Projects = () => {
       setIndividualProject(data.projects);
       console.log("individual project", data.projects);
     } catch (error) {
-      alert("Error: " + error);
+      console.log("Error: " + error);
     } finally {
       setLoading(false); // Set loading to false after fetching data
     }
@@ -38,7 +38,7 @@ const Projects = () => {
       setProjectsData(data.users);
       console.log("all the projects", data.users);
     } catch (error) {
-      alert("Error: " + error);
+      console.log("Error: " + error);
     } finally {
       setLoading(false); // Set loading to false after fetching data
     }
