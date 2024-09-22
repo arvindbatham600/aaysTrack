@@ -12,7 +12,7 @@ const Profile = () => {
 
   useEffect(() => {
     getUserProjects();
-  }, [details]);
+  }, []);
 
   const getUserProjects = async () => {
     try {

@@ -17,9 +17,9 @@ const AdminMenuData = [
 
 const ManagerMenuData = [
   { id: 1, name: "Home", icon: <HomeIcon />, path: "/home" },
-  { id: 2, name: "Employees", icon: <GroupsIcon />, path: "/employees" },
-  { id: 3, name: "Projects", icon: <TaskIcon />, path: "/projects" },
-  { id: 4, name: "Documents", icon: <DescriptionIcon />, path: "/documents" },
+  // { id: 2, name: "Employees", icon: <GroupsIcon />, path: "/employees" },
+  { id: 2, name: "Projects", icon: <TaskIcon />, path: "/projects" },
+  { id: 3, name: "Documents", icon: <DescriptionIcon />, path: "/documents" },
 ];
 
 const EmployeeMenuData = [
