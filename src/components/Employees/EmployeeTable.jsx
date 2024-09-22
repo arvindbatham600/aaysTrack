@@ -9,8 +9,8 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import api from "../utils/api";
-import { useEffect } from "react";
-import { Dialog, IconButton } from "@mui/material";
+import { useEffect, useState } from "react";
+import { Dialog, IconButton, CircularProgress } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import ManagerProfile from "../Managers/ManagerProfile";
 
@@ -37,6 +37,7 @@ export default function EmployeeTable() {
   const [open, setOpen] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [employeeData, setEmployeeData] = React.useState([]);
+  const [loading, setLoading] = React.useState(true); // Loading state
   const [selectedEmployee, setSelectedEmployee] = React.useState(null); // New state for selected employee
 
   const role = JSON.parse(localStorage.getItem("user"));
@@ -56,9 +57,10 @@ export default function EmployeeTable() {
   };
 
   const fetchEmployeeData = async () => {
+    setLoading(true); // Set loading to true before fetching data
     try {
       const response = await api.get("/user/getEmployeesWithProjectDetails", {
-        role,
+        params: { role },
       });
       const employees = response.data?.employees || [];
       const formattedEmployees = employees.map((employee) => ({
@@ -76,6 +78,8 @@ export default function EmployeeTable() {
     } catch (error) {
       console.error("Error fetching employees data:", error);
       alert("Error fetching employees data: " + error);
+    } finally {
+      setLoading(false); // Set loading to false after fetching data
     }
   };
 
@@ -90,7 +94,12 @@ export default function EmployeeTable() {
 
   return (
     <>
-      {employeeData.length > 0 ? (
+      {loading ? ( // Show loading spinner while fetching data
+        <div style={{ textAlign: "center", marginTop: "20px" }}>
+          <CircularProgress />
+          <p>Loading Employees...</p>
+        </div>
+      ) : employeeData.length > 0 ? (
         <Paper sx={{ width: "100%", overflow: "hidden" }}>
           <TableContainer sx={{ maxHeight: "80vh" }}>
             <Table stickyHeader aria-label="sticky table">
@@ -152,7 +161,7 @@ export default function EmployeeTable() {
           />
         </Paper>
       ) : (
-        <p style={{ textAlign: "center" }}>Loading Employees....</p>
+        <p style={{ textAlign: "center" }}>No Employees Found</p>
       )}
 
       <Dialog open={open} onClose={handleClose}>
