@@ -24,8 +24,8 @@ const ManagerMenuData = [
 
 const EmployeeMenuData = [
   { id: 1, name: "Home", icon: <HomeIcon />, path: "/home" },
-  { id: 2, name: "Projects", icon: <TaskIcon />, path: "/projects" },
-  { id: 3, name: "Documents", icon: <DescriptionIcon />, path: "/documents" },
+  // { id: 2, name: "Projects", icon: <TaskIcon />, path: "/projects" },
+  { id: 2, name: "Documents", icon: <DescriptionIcon />, path: "/documents" },
 ];
 
 const SideNavbar = () => {

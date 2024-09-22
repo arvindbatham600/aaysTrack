@@ -13,10 +13,12 @@ const ProfileCard = ({ project }) => {
   const [projectId, setProjectId] = useState();
   const [open, setOpen] = useState(false);
 
-  const { id, name, rating, status, startDate, endDate } = project;
+  const { id, name, rating, status, startDate, endDate, ratings } = project;
   const details = JSON.parse(localStorage.getItem("user"))?.userDetails;
   const manager = details?.name;
   const role = JSON.parse(localStorage.getItem("role"));
+  console.log("project details", project);
+  console.log("ratings", ratings);
 
   const fetchEmployeesRatings = async () => {
     try {
@@ -31,7 +33,9 @@ const ProfileCard = ({ project }) => {
   };
 
   const handleOpen = () => {
-    fetchEmployeesRatings();
+    if (role === "MANAGER") {
+      fetchEmployeesRatings();
+    }
     setOpen(true);
   };
 
@@ -64,10 +68,12 @@ const ProfileCard = ({ project }) => {
           <div>Project Name - </div>
           <div>{name}</div>
         </div>
-        <div className="project-rating">
-          <div>{ratingName} Rating - </div>
-          <div>{rating}</div>
-        </div>
+        {role === "MANAGER" && (
+          <div className="project-rating">
+            <div>{ratingName} Rating - </div>
+            <div>{rating}</div>
+          </div>
+        )}
         <div className="project-status">
           <div>Status - </div>
           <div
@@ -103,10 +109,12 @@ const ProfileCard = ({ project }) => {
               {status}
             </div>
           </div>
-          <div className="pro">
-            <div>Project Manager - </div>
-            <div>{manager}</div>
-          </div>
+          {role === "MANAGER" && (
+            <div className="pro">
+              <div>Project Manager - </div>
+              <div>{manager}</div>
+            </div>
+          )}
           <div className="pro">
             <div>Start Date - </div>
             <div>{startDate}</div>
@@ -115,17 +123,35 @@ const ProfileCard = ({ project }) => {
             <div>End Date - </div>
             <div>{endDate}</div>
           </div>
-          <div className="employee">
-            <div>Employee - </div>
-            {userRatings.length > 0 ? (
-              <RatingsTable rating={userRatings} />
-            ) : (
-              <EmployeeRatingTable
-                projectId={projectId}
-                employees={employeeInfo}
-              />
-            )}
-          </div>
+          {role === "EMPLOYEE" && (
+            <div className="pro">
+              <div> Review - </div>
+              <div>
+                {ratings.length > 0 && <div>{ratings[0].review} </div>}{" "}
+              </div>
+            </div>
+          )}
+          {role === "EMPLOYEE" && (
+            <div className="pro">
+              <div> Review - </div>
+              <div>
+                {ratings.length > 0 && <div>{ratings[0].rating} </div>}{" "}
+              </div>
+            </div>
+          )}
+          {role === "MANAGER" && (
+            <div className="employee">
+              <div>Employee - </div>
+              {userRatings.length > 0 ? (
+                <RatingsTable rating={userRatings} />
+              ) : (
+                <EmployeeRatingTable
+                  projectId={projectId}
+                  employees={employeeInfo}
+                />
+              )}
+            </div>
+          )}
         </div>
       </Dialog>
     </>
