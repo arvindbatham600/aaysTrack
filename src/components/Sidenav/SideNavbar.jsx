@@ -12,20 +12,35 @@ const AdminMenuData = [
   { id: 2, name: "Managers", icon: <ManageAccountsIcon />, path: "/managers" },
   { id: 3, name: "Employees", icon: <GroupsIcon />, path: "/employees" },
   { id: 4, name: "Projects", icon: <TaskIcon />, path: "/projects" },
-  { id: 5, name: "Documents", icon: <DescriptionIcon />, path: "/documents" },
+  {
+    id: 5,
+    name: "Documents",
+    icon: <DescriptionIcon />,
+    path: "https://8xczqb29-3000.inc1.devtunnels.ms/",
+  },
 ];
 
 const ManagerMenuData = [
   { id: 1, name: "Home", icon: <HomeIcon />, path: "/home" },
   // { id: 2, name: "Employees", icon: <GroupsIcon />, path: "/employees" },
   { id: 2, name: "Projects", icon: <TaskIcon />, path: "/projects" },
-  { id: 3, name: "Documents", icon: <DescriptionIcon />, path: "/documents" },
+  {
+    id: 3,
+    name: "Documents",
+    icon: <DescriptionIcon />,
+    path: "https://8xczqb29-3000.inc1.devtunnels.ms/",
+  },
 ];
 
 const EmployeeMenuData = [
   { id: 1, name: "Home", icon: <HomeIcon />, path: "/home" },
   // { id: 2, name: "Projects", icon: <TaskIcon />, path: "/projects" },
-  { id: 2, name: "Documents", icon: <DescriptionIcon />, path: "/documents" },
+  {
+    id: 2,
+    name: "Documents",
+    icon: <DescriptionIcon />,
+    path: "https://8xczqb29-3000.inc1.devtunnels.ms/",
+  },
 ];
 
 const SideNavbar = () => {
@@ -43,7 +58,13 @@ const SideNavbar = () => {
   }
 
   const handleClick = (path) => {
-    navigate(path);
+    if (path.startsWith("http")) {
+      // Open external URLs
+      window.location.href = path;
+    } else {
+      // Use navigate for internal routes
+      navigate(path);
+    }
   };
 
   return (
